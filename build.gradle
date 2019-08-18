@@ -1,0 +1,39 @@
+plugins {
+    id 'java-library'
+    id 'application'
+}
+
+apply from: 'dependencies.gradle'
+
+group 'com.money.transfer'
+version '1.0-SNAPSHOT'
+
+mainClassName = 'com.money.transfer.Application'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.logging.log4j:log4j-core:${libsVersion.apacheLog4j}"
+    implementation "org.apache.logging.log4j:log4j-api:${libsVersion.apacheLog4j}"
+    implementation "io.undertow:undertow-core:${libsVersion.undertowCore}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${libsVersion.jacksonCore}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${libsVersion.jacksonCore}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${libsVersion.jacksonCore}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${libsVersion.junit}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${libsVersion.junit}"
+    testImplementation "io.rest-assured:rest-assured:${libsVersion.restAssured}"
+}
+
+test {
+    useJUnitPlatform()
+    dependsOn 'cleanTest'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
