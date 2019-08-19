@@ -16,7 +16,7 @@ public class Account {
     public final Lock lock = new ReentrantLock();
     private long accountId;
     private String accountHolderName;
-    // declared volatile to avoid read thread
+    // declared volatile to avoid read lock
     private volatile BigDecimal balance;
 
     public Account(String accountHolderName, BigDecimal balance) {
